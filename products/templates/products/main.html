@@ -1,18 +1,18 @@
 {% extends 'base.html' %} {% load static %} {% include 'shared/_navbar.html' %}
 {% block content %} {% if user.is_authenticated %}
 <div class="container">
-  <h1>글 목록입니다.</h1>
-  <a href="{% url 'product:new' %}" class="btn btn-primary">새 글 작성</a>
+  <h1>제품목록</h1>
+  <a href="{% url 'products:new' %}" class="btn btn-primary">상품 업로드</a>
   <div class="row">
-    {% for product in product %}
+    {% for product in products %}
     <div class="col-md-4 col-12">
       <div class="card" style="width: 18rem; margin-top: 20px;">
         <div class="card-body">
-          <h5 class="card-title">{{ product.title }}</h5>
-          <p class="card-text">{{ product.content }}</p>
+          <h5 class="card-title">{{ product.name }}</h5>
+          <p class="card-text">{{ product.desc }}</p>
           <p class="card-text">조회수 : {{ product.view_count }}</p>
           <p>{{ product.created_at }}</p>
-          <a href="{% url 'product:show' post.pk %}" class="btn btn-primary"
+          <a href="{% url 'products:show' post.pk %}" class="btn btn-primary"
             >상세보기</a
           >
         </div>

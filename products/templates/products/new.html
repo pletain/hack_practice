@@ -1,21 +1,25 @@
 {% extends 'base.html' %} {% block content %}
 <div class="container">
   <h1>
-    새로운 글 작성하기
+    상품 입력하기
   </h1>
   <form
-    action="{% url 'product:create' %}"
+    action="{% url 'products:create' %}"
     method="PRODUCT"
     enctype="multipart/form-data"
   >
     {% csrf_token %}
     <div class="form-group">
-      <label>글 제목</label>
-      <input type="text" class="form-control" name="title" />
+      <label>상품이름</label>
+      <input type="text" class="form-control" name="name" />
     </div>
     <div class="form-group">
-      <label>글 내용</label>
-      <textarea class="form-control" name="content"></textarea>
+      <label>소개</label>
+      <textarea class="form-control" name="desc"></textarea>
+    </div>
+    <div class="form-group">
+      <label>가격</label>
+      <textarea type="integer" class="form-control" name="price"></textarea>
     </div>
     <input type="file" , name="image" />
     <input type="submit" value="글 작성" class="btn btn-outline-primary" />

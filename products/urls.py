@@ -1,8 +1,8 @@
 from django.urls import path
-from .views import *
+from .views import new, create, main, show, update, delete
 
 
-app_name = 'product'
+app_name = 'products'
 urlpatterns = [
     path('new/',new, name="new"),
     path('create/',create, name="create"),

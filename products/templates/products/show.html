@@ -1,6 +1,6 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
 <h1>상세보기 페이지</h1>
-<h3>글 제목 : {{ product.title }}</h3>
+<h3>글 제목 : {{ product.name }}</h3>
 {% if product.user %}
 <h3>작성자 : {{ product.user }}</h3>
 <br />
@@ -8,7 +8,7 @@
 <h3>작성자 : 알수 없음</h3>
 {% endif %}
 <br />
-<h3>글 내용 : {{ product.content }}</h3>
+<h3>글 내용 : {{ product.desc }}</h3>
 <br />
 <h3>작성 시각 : {{ product.created_at }}</h3>
 <br />
@@ -22,10 +22,10 @@
 {% endif %}
 <h1>
   {% if user == product.user %}
-  <a href="{% url 'product:update' product.pk %}" class="btn btn-primary"
+  <a href="{% url 'products:update' product.pk %}" class="btn btn-primary"
     >수정</a
   >
-  <a href="{% url 'product:delete' product.pk %}" class="btn btn-danger"
+  <a href="{% url 'products:delete' product.pk %}" class="btn btn-danger"
     >삭제</a
   >
   {% endif %}

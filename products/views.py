@@ -3,7 +3,7 @@ from .models import Product
 
 # Create your views here.
 def new(request):
-    return render(request, 'product/new.html')
+    return render(request, 'products/new.html')
 
 def create(request):
     if request.method == "PRODUCT":
@@ -14,31 +14,29 @@ def create(request):
         image = request.FILES.get('image')
         user = request.user
         Post.objects.create(title=title, content=content, user = user, image = image)
-    return redirect('product:main')
+    return redirect('products:main')
      
 def main(request):
     product = Product.objects.all()
-    return render(request,'product/main.html', {'product': product})
+    return render(request,'products/main.html', {'products': product})
 
 def show(request, id):
-    post = Post.objects.get(pk=id)
-    A = post.view_count
-    A = A + 1
-    post.view_count = A
-    post.save() 
-    return render(request, 'product/show.html', {'product':product})
+    product = Product.objects.get(pk=id)
+    product.view_count += 1
+    product.save() 
+    return render(request, 'products/show.html', {'product':product})
 
 def update(request,id):
-    post = get_object_or_404(Post,pk=id)
+    product = get_object_or_404(Post,pk=id)
     if request.method == "PRODUCT":
-        post.title = request.PRODUCT['title']
-        post.content = request.PRODUCT['content']
-        post.image = request.FILES.get('image')
-        post.save()
-        return redirect('product:main')
-    return render(request,'product/update.html',{"post":post})
+        product.title = request.PRODUCT['title']
+        product.content = request.PRODUCT['content']
+        product.image = request.FILES.get('image')
+        product.save()
+        return redirect('products:main')
+    return render(request,'products/update.html',{"post":post})
 
 def delete(request,id):
     product=get_object_or_404(Post,pk=id)
     product.delete()
-    return redirect("product:main")
+    return redirect("products:main")
