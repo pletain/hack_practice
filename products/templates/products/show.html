@@ -1,33 +1,35 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
 <h1>상세보기 페이지</h1>
-<h3>글 제목 : {{ product.name }}</h3>
+<h3>상품명 : {{ product.name }}</h3>
+<br />
 {% if product.user %}
-<h3>작성자 : {{ product.user }}</h3>
+<h3>판매자 : {{ product.user }}</h3>
 <br />
 {% else %}
-<h3>작성자 : 알수 없음</h3>
+<h3>판매자 : 알수 없음</h3>
 {% endif %}
 <br />
-<h3>글 내용 : {{ product.desc }}</h3>
+<h3>설명 : {{ product.desc }}</h3>
 <br />
-<h3>작성 시각 : {{ product.created_at }}</h3>
 <br />
-
-<h3>조회수 : {{ product.view_count }}</h3>
+<h3>가격 : {{ product.price }}</h3>
 <br />
-<h3>수정 시각 : {{ product.updated_at }}</h3>
+<br />
+<h3>재고 : {{ product.cnt }}</h3>
 <br />
 {% if product.image %}
 <img src="{{ product.image.url }}" alt="" />
 {% endif %}
+<h3>작성 시각 : {{ product.created_at }}</h3>
+<br />
+<h3>수정 시각 : {{ product.updated_at }}</h3>
+<br />
+<h3>조회수 : {{ product.view_count }}</h3>
+<br />
 <h1>
   {% if user == product.user %}
-  <a href="{% url 'products:update' product.pk %}" class="btn btn-primary"
-    >수정</a
-  >
-  <a href="{% url 'products:delete' product.pk %}" class="btn btn-danger"
-    >삭제</a
-  >
+  <a href="{% url 'products:update' product.pk %}" class="btn btn-primary">수정</a>
+  <a href="{% url 'products:delete' product.pk %}" class="btn btn-danger">삭제</a>
   {% endif %}
 </h1>
 {% endblock %}
