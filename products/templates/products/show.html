@@ -1,4 +1,6 @@
-{% extends 'base.html' %} {% load static %} {% block content %}
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
 <h1>상세보기 페이지</h1>
 <h3>상품명 : {{ product.name }}</h3>
 <br />
@@ -18,7 +20,7 @@
 <h3>재고 : {{ product.cnt }}</h3>
 <br />
 {% if product.image %}
-<img src="{{ product.image.url }}" alt="" />
+<img class="max-small" src="{{ product.image.url }}" alt="" />
 {% endif %}
 <h3>작성 시각 : {{ product.created_at }}</h3>
 <br />

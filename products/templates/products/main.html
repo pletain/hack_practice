@@ -11,13 +11,11 @@
           <p class="card-text">가격 : {{ product.price }} 원</p>
           <p>재고 : {{ product.cnt }} 개</p>
           <p class="card-text">조회수 : {{ product.view_count }}</p>
-
           <p>{{ product.created_at }}</p>
           <a href="{% url 'products:show' product.pk %}" class="btn btn-primary">상세보기</a>
         </div>
       </div>
     </div>
-
     {% endfor %}
   </div>
 </div>
