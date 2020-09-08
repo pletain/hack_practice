@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Product, Comment
+from django.contrib.auth.decorators import login_required
+from .models import *
 
 # Create your views here.
 def new(request):
@@ -17,7 +18,7 @@ def create(request):
     return redirect('products:main')
      
 def main(request):
-    product = Product.objects.all()
+    product = Product.objects.all().order_by('-created_at')
     return render(request,'products/main.html', {'product': product})
 
 def show(request, id):
@@ -47,9 +48,28 @@ def delete(request,id):
 
 def create_comment(request, post_id):    
     if request.method == "POST":
-        product = get_object_or_404(Product, pk=product_id)
+        product = get_object_or_404(Product, pk=post_id)
         current_user = request.user
         score = request.POST.get('score')
         comment_content = request.POST.get('content')
-        Comment.objects.create(content=comment_content, user=current_user, score=score, product = product)              
-    return redirect('products:show', product.pk)   
+        Comment.objects.create(content=comment_content, writer=current_user, score=score, product = product)              
+    return redirect('products:show', product.pk)
+
+@login_required
+def post_like(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+    
+    if request.user in product.like_user_set.all():
+        product.like_user_set.remove(request.user)
+    else:
+        product.like_user_set.add(request.user)
+    
+    if request.GET.get('redirect_to') == 'show':
+        return redirect('products:show', product.pk)
+    else:
+        return redirect('products:main')
+
+@login_required
+def like_list(request):
+    likes = request.user.like_set.all()
+    return render(request,'products/like_list.html', {'likes': likes})

@@ -30,6 +30,13 @@
 <h3>수정 시각 : {{ product.updated_at }}</h3>
 <br />
 <h3>조회수 : {{ product.view_count }}</h3>
+<a href="{% url 'products:product_like' post.id %}?redirect_to=show">
+  {% if user in product.like_user_set.all %}
+  <i class="fas fa-heart"></i>
+  {% else %}
+  <i class="far fa-heart"></i>
+  {% endif %}
+</a>
 <br />
 <h1>
   {% if user == product.user %}
@@ -39,7 +46,7 @@
 </h1>
 
 <div class="container mt-5">
-  <form class="form-now" action="{% url 'product:create_comment' product.id %}" method="POST">
+  <form class="form-row" action="{% url 'products:create_comment' product.id %}" method="POST">
     {% csrf_token %}
     <div class="form-group">
       <label>평점</label>
@@ -53,10 +60,10 @@
   {% for comment in comments %}
   <div class="card">
     <div class="card-body">
-      {% if comment.user.username == 'user' %}
-      <b>{{ comment.user.last_name }}{{ comment.user.first_name }}
+      {% if comment.writer.username == 'user' %}
+      <b>{{ comment.writer.last_name }}{{ comment.writer.first_name }}
         {% else %}
-        <b>{{ comment.user }}</b> {% endif %} : {{ comment.content }}</br>
+        <b>{{ comment.writer }}</b> {% endif %} : {{ comment.content }}</br>
         <small>{{ comment.created_at }}</small>
     </div>
   </div>

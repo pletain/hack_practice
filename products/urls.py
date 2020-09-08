@@ -1,6 +1,5 @@
 from django.urls import path
-from .views import new, create, main, show, update, delete
-
+from .views import *
 
 app_name = 'products'
 urlpatterns = [
@@ -10,4 +9,7 @@ urlpatterns = [
     path('show/<int:id>', show, name="show"),
     path('update/<int:id>/', update, name="update"),
     path('delete/<int:id>/', delete, name="delete"),
+    path('<int:post_id>/create_comment', create_comment, name="create_comment"),
+    path('<int:post_id>/post_like', post_like, name="post_like"),
+    path('like_list/', like_list, name="like_list"),
 ] 
