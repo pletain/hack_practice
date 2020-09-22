@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-{% if product.writer %}
-{% if product.writer.username == 'user' %}
-<h3>작성자 : {{ product.writer.last_name }}{{ product.writer.first_name }}
+{% if post.writer %}
+{% if postt.writer.username == 'user' %}
+<h3>작성자 : {{ post.writer.last_name }}{{ post.writer.first_name }}
 </h3>
 {% else %}
-<h3>작성자 : {{ product.writer }}</h3>
+<h3>작성자 : {{ postt.writer }}</h3>
 {% endif %}
 {% else %}
 <h3>작성자 : 알 수 없음</h3> {% endif %}
@@ -14,24 +14,24 @@
 
 
 <br />
-<h3>설명 : {{ product.desc }}</h3>
+<h3>설명 : {{ post.desc }}</h3>
 <br />
 <br />
-<h3>가격 : {{ product.price }}</h3>
+<h3>가격 : {{ post.price }}</h3>
 <br />
 <br />
-<h3>재고 : {{ product.cnt }}</h3>
+<h3>재고 : {{ post.cnt }}</h3>
 <br />
-{% if product.image %}
-<img class="max-small" src="{{ product.image.url }}" alt="" />
+{% if post.image %}
+<img class="max-small" src="{{ post.image.url }}" alt="" />
 {% endif %}
-<h3>작성 시각 : {{ product.created_at }}</h3>
+<h3>작성 시각 : {{ post.created_at }}</h3>
 <br />
-<h3>수정 시각 : {{ product.updated_at }}</h3>
+<h3>수정 시각 : {{ post.updated_at }}</h3>
 <br />
-<h3>조회수 : {{ product.view_count }}</h3>
-<a href="{% url 'products:product_like' post.id %}?redirect_to=show">
-  {% if user in product.like_user_set.all %}
+<h3>조회수 : {{ post.view_count }}</h3>
+<a href="{% url 'posts:post_like' post.id %}?redirect_to=show">
+  {% if user in post.like_user_set.all %}
   <i class="fas fa-heart"></i>
   {% else %}
   <i class="far fa-heart"></i>
@@ -39,14 +39,14 @@
 </a>
 <br />
 <h1>
-  {% if user == product.user %}
-  <a href="{% url 'products:update' product.pk %}" class="btn btn-primary">수정</a>
-  <a href="{% url 'products:delete' product.pk %}" class="btn btn-danger">삭제</a>
+  {% if user == post.user %}
+  <a href="{% url 'posts:update' post.pk %}" class="btn btn-primary">수정</a>
+  <a href="{% url 'posts:delete' post.pk %}" class="btn btn-danger">삭제</a>
   {% endif %}
 </h1>
 
 <div class="container mt-5">
-  <form class="form-row" action="{% url 'products:create_comment' product.id %}" method="POST">
+  <form class="form-row" action="{% url 'posts:create_comment' post.id %}" method="POST">
     {% csrf_token %}
     <div class="form-group">
       <label>평점</label>

@@ -3,24 +3,24 @@
   <h1>
     수정하기
   </h1>
-  <form action="{% url 'products:update' product.id %}" method="POST" enctype="multipart/form-data">
+  <form action="{% url 'posts:update' post.id %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="form-group">
       <label>제품명</label>
-      <input type="text" class="form-control" name="name" value="{{product.name}}" />
+      <input type="text" class="form-control" name="name" value="{{post.name}}" />
     </div>
     <div class="form-group">
       <label>제품설명</label>
       <textarea class="form-control" name="desc">
-{{product.desc}}</textarea>
+{{post.desc}}</textarea>
     </div>
     <div class="form-group">
       <label>가격</label>
-      <input type="text" class="form-control" name="price" value="{{product.price}}" />
+      <input type="text" class="form-control" name="price" value="{{post.price}}" />
     </div>
     <div class="form-group">
       <label>재고</label>
-      <input type="text" class="form-control" name="cnt" value="{{product.cnt}}" />
+      <input type="text" class="form-control" name="cnt" value="{{post.cnt}}" />
     </div>
     <input type="file" , name="image" />
     <input type="submit" value="글 수정" class="btn btn-outline-primary" />
