@@ -9,9 +9,9 @@ class Post(models.Model):
     cnt = models.IntegerField(null=True)
     view_count = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add = True)
-    updated_at = models.DateTimeField(auto_nowç= True)
+    updated_at = models.DateTimeField(auto_now= True)
     image = models.ImageField(upload_to='images/', null=True)
-    user = models.ForeignKey(User, on_delete = models.CASCADE, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     like_user_set = models.ManyToManyField(User, blank=True, related_name="like_user_set", through = "Like")
 
     @property

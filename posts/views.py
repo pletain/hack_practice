@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import *
-
+from .models import Post, Comment, User
 # Create your views here.
 def new(request):
     return render(request, 'posts/new.html')
@@ -13,9 +12,9 @@ def create(request):
         price = request.POST.get('price')
         cnt = request.POST.get('cnt')
         image = request.FILES.get('image')
-        user = request.user
-        Post.objects.create(name=name, desc=desc, price=price, user=author, cnt=cnt, image = image)
-    return redirect('posts:main')
+        current_user = request.user
+        post = Post.objects.create(name=name, desc=desc, price=price, user=current_user, cnt=cnt, image = image)
+    return redirect(request, 'posts/main.html')
      
 def main(request):
     post = Post.objects.all().order_by('-created_at')
